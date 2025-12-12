@@ -152,7 +152,8 @@
                     <!-- Projects Dropdown -->
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true"
                         @mouseleave="open = false">
-                        <a href="index.html#work" class="relative transition-colors duration-300 flex items-center gap-1"
+                        <a href="index.html#work"
+                            class="relative transition-colors duration-300 flex items-center gap-1"
                             :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut mix-blend-difference': !scrolled }">
                             <span>PROJECTS</span>
                             <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-300"
@@ -310,7 +311,7 @@
                         <input type="hidden" name="_subject" value="New Inquiry from Portfolio Website">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="http://localhost:8000/success.html">
+                        <input type="hidden" name="_next" id="next-redirect" value="">
                         <input type="text" name="_honey" style="display:none">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <!-- Name -->
@@ -548,7 +549,11 @@
             } catch (e) { console.warn("Cursor init failed:", e); }
 
             // 5. Form Handling (Standard Submission)
-            // AJAX removed for reliability on local filesystem
+            // Dynamic Redirect URL
+            const nextInput = document.getElementById('next-redirect');
+            if (nextInput) {
+                nextInput.value = window.location.origin + '/success.html';
+            }
         });
     </script>
 </body>
