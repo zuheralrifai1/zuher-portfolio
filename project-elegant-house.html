@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Elegant House | Zuher Alrifai</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            onyx: '#1C1C1B',
+                            walnut: '#6A5D52',
+                            greige: '#B7AC9B',
+                            ash: '#979086',
+                            stucco: '#E2E2DE',
+                            // Project specific colors
+                            hague: '#3D4E57',
+                            dropcloth: '#C9BEAB',
+                            schoolhouse: '#E6DFD1',
+                            sudbury: '#DCB771',
+                            lightblue: '#B8BCB5',
+                            nqblack: '#222323'
+                        }
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            background-color: #1C1C1B;
+            color: #E2E2DE;
+        }
+
+        /* Only hide default cursor when custom one is active */
+        body.has-custom-cursor {
+            cursor: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            /* Ensures visibility on all backgrounds */
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Hover state for cursor */
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden selection:bg-brand-walnut selection:text-white">
+    <!-- Preloader -->
+    <div id="preloader"
+        class="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-white font-serif text-2xl animate-pulse">ZUHER ALRIFAI</div>
+    </div>
+
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 top-0 left-0 transition-all duration-500"
+        x-data="{ scrolled: false, mobileMenuOpen: false }" @scroll.window="scrolled = (window.pageYOffset > 50)">
+
+        <!-- Main Navbar -->
+        <nav class="w-full transition-all duration-500"
+            :class="{ 'bg-brand-onyx/95 backdrop-blur-md shadow-sm py-4': scrolled, 'bg-transparent py-6': !scrolled }">
+            <div class="container mx-auto px-6 flex justify-between items-center relative z-50">
+                <!-- Logo -->
+                <a href="test.html"
+                    class="text-2xl font-serif font-bold tracking-tighter transition-colors duration-300"
+                    :class="{ 'text-brand-stucco': scrolled || mobileMenuOpen, 'text-brand-stucco mix-blend-difference': !scrolled && !mobileMenuOpen }">
+                    ZUHER ALRIFAI
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                    <!-- Projects Dropdown -->
+                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true"
+                        @mouseleave="open = false">
+                        <a href="test.html#work" class="relative transition-colors duration-300 flex items-center gap-1"
+                            :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut mix-blend-difference': !scrolled }">
+                            <span>PROJECTS</span>
+                            <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-300"
+                                :class="{ 'rotate-180': open }"></i>
+                        </a>
+
+                        <!-- Level 1 Dropdown -->
+                        <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 translate-y-2"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0"
+                            x-transition:leave-end="opacity-0 translate-y-2"
+                            class="absolute top-full left-0 mt-4 w-64 bg-brand-stucco shadow-lg rounded-sm py-2 border-t-2 border-brand-walnut"
+                            x-cloak>
+
+                            <!-- Project 1: The Elegant House -->
+                            <div class="relative group/project" x-data="{ projectOpen: false }"
+                                @mouseenter="projectOpen = true" @mouseleave="projectOpen = false">
+                                <a href="project-elegant-house.html"
+                                    class="flex items-center justify-between px-4 py-3 text-[14px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">
+                                    <span>The Elegant House</span>
+                                    <i data-lucide="chevron-right" class="w-3 h-3 text-brand-ash"></i>
+                                </a>
+
+                                <!-- Level 2 Dropdown -->
+                                <div x-show="projectOpen" x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 translate-x-2"
+                                    x-transition:enter-end="opacity-100 translate-x-0"
+                                    x-transition:leave="transition ease-in duration-150"
+                                    x-transition:leave-start="opacity-100 translate-x-0"
+                                    x-transition:leave-end="opacity-0 translate-x-2"
+                                    class="absolute top-0 right-full w-64 bg-brand-stucco shadow-lg rounded-sm py-2 border-t-2 border-brand-walnut -mr-1"
+                                    x-cloak>
+                                    <div class="px-4 py-2 border-b border-brand-ash/20 mb-1">
+                                        <span class="text-[10px] text-brand-ash uppercase tracking-widest">Project
+                                            Sections</span>
+                                    </div>
+                                    <a href="#section-1"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">01.
+                                        Market Research</a>
+                                    <a href="#section-2"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">02.
+                                        Target Audience</a>
+                                    <a href="#section-3"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">03.
+                                        Brand Positioning</a>
+                                    <a href="#section-4"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">04.
+                                        Brand Narrative</a>
+                                    <a href="#section-5"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">05.
+                                        Tone of Voice</a>
+                                    <a href="#section-6"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">06.
+                                        Colour Palette</a>
+                                    <a href="#section-7"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">07.
+                                        Logo System</a>
+                                    <a href="#section-8"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">08.
+                                        Brand Guidelines</a>
+                                    <a href="#section-9"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">09.
+                                        Application</a>
+                                    <a href="#section-10"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">10.
+                                        Implementation</a>
+                                    <a href="#section-11"
+                                        class="block px-4 py-2 text-[13px] text-brand-onyx hover:bg-brand-greige/20 hover:text-brand-walnut transition-colors">11.
+                                        Summary</a>
+                                </div>
+                            </div>
+
+                            <!-- Placeholder -->
+                            <div class="px-4 py-3 text-[14px] text-brand-ash cursor-not-allowed">
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="about.html" class="transition-colors duration-300"
+                        :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut mix-blend-difference': !scrolled }">
+                        <span>ABOUT</span>
+                    </a>
+                    <a href="contact.html" class="transition-colors duration-300"
+                        :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut mix-blend-difference': !scrolled }">
+                        <span>CONTACT</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden focus:outline-none" @click="mobileMenuOpen = !mobileMenuOpen"
+                    :class="{ 'text-brand-stucco': scrolled || mobileMenuOpen, 'text-brand-stucco': !scrolled && !mobileMenuOpen }">
+                    <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-6 h-6"></i>
+                    <i data-lucide="x" x-show="mobileMenuOpen" class="w-6 h-6" x-cloak></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 -translate-y-full"
+                x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-full"
+                class="fixed inset-0 bg-brand-onyx z-40 flex flex-col items-center justify-center md:hidden" x-cloak>
+                <div class="flex flex-col space-y-8 text-center">
+                    <a href="test.html#work" @click="mobileMenuOpen = false"
+                        class="font-serif text-3xl text-brand-stucco hover:text-brand-walnut transition-colors">WORK</a>
+                    <a href="about.html" @click="mobileMenuOpen = false"
+                        class="font-serif text-3xl text-brand-stucco hover:text-brand-walnut transition-colors">ABOUT</a>
+                    <a href="contact.html" @click="mobileMenuOpen = false"
+                        class="font-serif text-3xl text-brand-stucco hover:text-brand-walnut transition-colors">CONTACT</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden bg-brand-onyx">
+        <!-- Static Background Image (No Parallax, No Noise) -->
+        <div class="absolute inset-0 z-0 opacity-40">
+            <img src="images/background.jpg" alt="The Elegant House Hero" class="w-full h-full object-cover">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="font-serif text-5xl md:text-7xl text-brand-stucco mb-6 leading-tight">
+                The Elegant House – Brand Strategy & Identity Development
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-brand-stucco/80 text-lg md:text-xl mb-12 font-light">
+                Full rebrand including strategy, identity, guidelines, and rollout.
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="200">
+                <a href="#work"
+                    class="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium tracking-widest text-brand-stucco transition duration-300 ease-out border border-brand-stucco/20 rounded-full hover:border-brand-stucco/40">
+                    <span
+                        class="absolute inset-0 flex items-center justify-center w-full h-full text-brand-onyx duration-300 -translate-x-full bg-brand-stucco group-hover:translate-x-0 ease">
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </span>
+                    <span
+                        class="absolute flex items-center justify-center w-full h-full text-brand-stucco transition-all duration-300 transform group-hover:translate-x-full ease">VIEW
+                        WORK</span>
+                    <span class="relative invisible">VIEW WORK</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Intro: The Elegant House -->
+    <section id="work" class="py-32 bg-brand-onyx text-brand-stucco relative z-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-20 items-start">
+                <!-- Sticky Image Section -->
+                <div class="lg:w-1/2 lg:sticky lg:top-24" data-aos="fade-right">
+                    <div class="relative group overflow-hidden rounded-sm shadow-2xl border border-brand-walnut/20">
+                        <div
+                            class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10">
+                        </div>
+                        <!-- Image matching "Red room with chair" from PDF -->
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=2158&auto=format&fit=crop"
+                            alt="The Elegant House Interior"
+                            class="w-full h-[70vh] object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out">
+
+                        <div
+                            class="absolute bottom-8 left-8 z-20 text-brand-stucco opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="font-serif text-2xl italic">Interior & Upholstery</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div class="lg:w-1/2 pt-10">
+                    <div class="mb-12" data-aos="fade-up">
+                        <div class="flex items-center space-x-4 mb-8">
+                            <span class="h-px w-16 bg-brand-walnut"></span>
+                            <span class="text-brand-walnut tracking-[0.2em] text-sm font-bold uppercase">Selected
+                                Work</span>
+                        </div>
+                        <div class="mb-10">
+                            <h2 class="font-serif text-6xl md:text-7xl text-brand-stucco leading-tight">
+                                The Elegant<br>
+                                <span class="italic text-brand-walnut">House</span>
+                            </h2>
+                        </div>
+                        <h3 class="text-xl font-medium text-brand-stucco/60 mb-8">Brand Strategy & Identity Development
+                        </h3>
+                    </div>
+
+                    <div class="space-y-8 text-lg text-brand-stucco/80 leading-relaxed font-light" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <h4 class="text-brand-walnut font-bold uppercase tracking-widest text-sm mb-2">About The Brand
+                        </h4>
+                        <p>
+                            The Elegant House is a new upholstery and furniture design brand specialising in
+                            custom-made, high-quality pieces. The business needed a complete strategic foundation — from
+                            brand identity to marketing materials and online presence — to establish credibility,
+                            attract customers, and differentiate itself in a competitive local market.
+                        </p>
+                    </div>
+
+                    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="p-8 bg-brand-onyx border border-brand-walnut/20 hover:border-brand-walnut transition-colors duration-300">
+                            <h4 class="font-serif text-2xl text-brand-stucco mb-4">My Role</h4>
+                            <ul class="space-y-3 text-sm text-brand-stucco/70">
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Discovery & research
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Brand strategy (positioning, messaging, tone of voice)
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Full visual identity development
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Brand guidelines creation
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Website design & launch
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Marketing materials & operational assets
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-2"></span>
+                                    Brand rollout support
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="p-8 bg-brand-walnut text-brand-stucco">
+                            <h4 class="font-serif text-2xl mb-4">Outcome</h4>
+                            <p class="text-sm text-brand-stucco/90 leading-relaxed">
+                                A clear understanding of the brand’s purpose, ambition, and strategic needs, resulting
+                                in a focused strategic direction that guides the brand’s identity, tone, and visual
+                                style.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Sections -->
+    <section id="section-1" class="py-32 bg-brand-onyx text-brand-stucco relative overflow-hidden">
+        <!-- Background Text -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-[0.03] pointer-events-none select-none">
+            <span
+                class="text-[20vw] font-serif leading-none whitespace-nowrap absolute -top-20 -left-20 text-brand-stucco">RESEARCH</span>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Section 1: Market & Competitor Research -->
+            <div class="mb-40" data-aos="fade-up">
+                <div class="flex items-baseline mb-12">
+                    <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">01</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Market & Competitor Research</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <div>
+                        <h3 class="text-brand-walnut text-sm font-bold uppercase tracking-widest mb-6">What Was
+                            Researched</h3>
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-brand-stucco font-serif text-xl mb-2">Direct Competitors</h4>
+                                <p class="text-brand-stucco/60 text-sm leading-relaxed">Local businesses offering
+                                    upholstery and furniture services. Analysis included pricing, service positioning,
+                                    communication style, and visual identity.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-brand-stucco font-serif text-xl mb-2">Indirect Competitors</h4>
+                                <ul class="text-brand-stucco/60 text-sm list-disc list-inside space-y-1">
+                                    <li>Mass-market furniture stores</li>
+                                    <li>Interior design studios</li>
+                                    <li>Online home-decor brands</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-brand-stucco font-serif text-xl mb-2">Industry Trends</h4>
+                                <ul class="text-brand-stucco/60 text-sm list-disc list-inside space-y-1">
+                                    <li>Current furniture and upholstery design aesthetics</li>
+                                    <li>Consumer buying patterns</li>
+                                    <li>Digital behaviour in the home improvement sector</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-stucco/5 p-8 border border-brand-stucco/10">
+                        <h3 class="text-brand-walnut text-sm font-bold uppercase tracking-widest mb-6">Gaps &
+                            Opportunities</h3>
+                        <ul class="space-y-4 text-brand-stucco/80 text-sm">
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-walnut mr-3 mt-1"></i>
+                                <span>Traditional competitors tend to look outdated.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-walnut mr-3 mt-1"></i>
+                                <span>Mass-market brands lack personalisation.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-walnut mr-3 mt-1"></i>
+                                <span class="font-bold text-brand-stucco">Opportunity identified: premium bespoke
+                                    craftsmanship with modern, clean aesthetics.</span>
+                            </li>
+                        </ul>
+
+                        <div class="mt-8 pt-8 border-t border-brand-stucco/10">
+                            <h4 class="text-brand-stucco font-serif text-lg mb-2">Customer Expectations</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-brand-stucco/10 rounded-full text-xs">Quality
+                                    craftsmanship</span>
+                                <span class="px-3 py-1 bg-brand-stucco/10 rounded-full text-xs">Trust &
+                                    personalisation</span>
+                                <span class="px-3 py-1 bg-brand-stucco/10 rounded-full text-xs">Longevity</span>
+                                <span class="px-3 py-1 bg-brand-stucco/10 rounded-full text-xs">Attention to
+                                    detail</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Target Audience Analysis -->
+            <div id="section-2" class="mb-40" data-aos="fade-up">
+                <div class="flex items-baseline mb-12">
+                    <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">02</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Target Audience Analysis</h2>
+                </div>
+
+                <p class="text-brand-stucco/60 text-lg mb-12 max-w-3xl">
+                    The market values craftsmanship, customisation, and high-quality finishes. Customers want pieces
+                    that elevate their homes and reflect personal style.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Segment 1 -->
+                    <div
+                        class="bg-brand-onyx p-8 border-t-2 border-brand-walnut hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <h3 class="font-serif text-2xl text-brand-stucco mb-4">Homeowners Seeking Personalised Style
+                        </h3>
+                        <div class="space-y-4 text-sm text-brand-stucco/60">
+                            <div>
+                                <strong
+                                    class="text-brand-walnut block text-xs uppercase tracking-wider mb-1">Profile</strong>
+                                Age 30–55, stable income, suburban/semi-rural. Aesthetic-driven.
+                            </div>
+                            <div>
+                                <strong
+                                    class="text-brand-walnut block text-xs uppercase tracking-wider mb-1">Motivations</strong>
+                                Custom pieces reflecting taste, design upgrades.
+                            </div>
+                            <div>
+                                <strong class="text-brand-walnut block text-xs uppercase tracking-wider mb-1">Pain
+                                    Points</strong>
+                                Limited customisation, hard to find trustworthy local upholsterers.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segment 2 -->
+                    <div
+                        class="bg-brand-onyx p-8 border-t-2 border-brand-greige hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <h3 class="font-serif text-2xl text-brand-stucco mb-4">Interior Enthusiasts & DIY Upgraders</h3>
+                        <div class="space-y-4 text-sm text-brand-stucco/60">
+                            <div>
+                                <strong
+                                    class="text-brand-greige block text-xs uppercase tracking-wider mb-1">Profile</strong>
+                                Age 25–45, first-time homeowners. Trend-focused, confident mixing styles.
+                            </div>
+                            <div>
+                                <strong
+                                    class="text-brand-greige block text-xs uppercase tracking-wider mb-1">Motivations</strong>
+                                Affordable upgrades, experimenting with style.
+                            </div>
+                            <div>
+                                <strong class="text-brand-greige block text-xs uppercase tracking-wider mb-1">Pain
+                                    Points</strong>
+                                Poor-quality finishes, confusing fabric choices.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segment 3 -->
+                    <div
+                        class="bg-brand-onyx p-8 border-t-2 border-brand-ash hover:-translate-y-2 transition-transform duration-300 shadow-lg">
+                        <h3 class="font-serif text-2xl text-brand-stucco mb-4">Premium Craftsmanship Seekers</h3>
+                        <div class="space-y-4 text-sm text-brand-stucco/60">
+                            <div>
+                                <strong
+                                    class="text-brand-ash block text-xs uppercase tracking-wider mb-1">Profile</strong>
+                                Age 40–65, higher income. Appreciate heritage and tradition.
+                            </div>
+                            <div>
+                                <strong
+                                    class="text-brand-ash block text-xs uppercase tracking-wider mb-1">Motivations</strong>
+                                Long-term investment pieces, upgrade sentimental furniture.
+                            </div>
+                            <div>
+                                <strong class="text-brand-ash block text-xs uppercase tracking-wider mb-1">Pain
+                                    Points</strong>
+                                Lack of brands balancing modern design with craftsmanship.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Brand Positioning -->
+            <div id="section-3" class="mb-24" data-aos="fade-up"> <!-- Reduced vertical margin -->
+                <div class="flex items-baseline mb-8">
+                    <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">03</span>
+                    <h2 class="text-4xl md:text-5xl font-serif">Brand Positioning</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="mb-8">
+                            <h3 class="text-brand-walnut text-sm font-bold uppercase tracking-widest mb-4">What Sets the
+                                Brand Apart</h3>
+                            <ul class="space-y-2 text-brand-stucco/60 text-sm">
+                                <li class="flex items-center"><span
+                                        class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3"></span>Bespoke upholstery
+                                    and personalised craftsmanship</li>
+                                <li class="flex items-center"><span
+                                        class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3"></span>High-quality
+                                    materials and durable finishes</li>
+                                <li class="flex items-center"><span
+                                        class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3"></span>Modern design
+                                    informed by traditional techniques</li>
+                                <li class="flex items-center"><span
+                                        class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3"></span>Founder-led service
+                                    with attention to detail</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-brand-walnut text-sm font-bold uppercase tracking-widest mb-4">Desired
+                                Perception</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span
+                                    class="border border-brand-stucco/20 px-4 py-2 rounded-full text-sm text-brand-stucco/80">Premium
+                                    but approachable</span>
+                                <span
+                                    class="border border-brand-stucco/20 px-4 py-2 rounded-full text-sm text-brand-stucco/80">Design-forward</span>
+                                <span
+                                    class="border border-brand-stucco/20 px-4 py-2 rounded-full text-sm text-brand-stucco/80">Craftsmanship-driven</span>
+                                <span
+                                    class="border border-brand-stucco/20 px-4 py-2 rounded-full text-sm text-brand-stucco/80">Trustworthy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fixes: Reduced padding (p-6/p-8), tight sizing, max-height constraints -->
+                    <div
+                        class="relative bg-brand-stucco text-brand-onyx p-8 shadow-xl max-h-[50vh] flex flex-col justify-center">
+                        <i data-lucide="quote" class="w-8 h-8 text-brand-walnut absolute top-6 left-6 opacity-30"></i>
+                        <!-- Tightened leading, smaller size if needed, but keeping font size as requested, just reduced spacing -->
+                        <h4 class="text-2xl md:text-3xl font-serif leading-snug mb-4 text-center mt-6">
+                            "A premium upholstery brand offering personalised, design-led craftsmanship for homes that
+                            value comfort, style, and long-lasting quality."
+                        </h4>
+                        <p class="text-center text-xs font-bold tracking-[0.2em] text-brand-onyx/60 uppercase">
+                            Positioning Statement</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Brand Narrative -->
+            <section id="section-4" class="py-48 bg-brand-onyx text-brand-stucco relative" data-aos="fade-up">
+                <div class="container mx-auto px-6">
+                    <div class="flex flex-col lg:flex-row gap-16 md:gap-24">
+                        <!-- Left Column (55-60%) -->
+                        <div class="w-full lg:w-[60%]">
+                            <h2 class="font-serif text-4xl md:text-5xl mb-8">Brand Story</h2>
+                            <p class="text-brand-stucco/80 text-lg leading-relaxed font-light">
+                                The Elegant House was created from a simple belief: homes deserve design that feels
+                                personal, intentional, and rooted in real craftsmanship. From the beginning, the brand
+                                aimed to move away from generic décor and instead build pieces that carry meaning —
+                                through texture, material, and careful attention to detail. The identity reflects this
+                                philosophy: calm, refined, and grounded in a modern interpretation of heritage. Every
+                                visual and verbal element was shaped to express trust, care, and an uncompromising
+                                commitment to quality, allowing the brand to feel both contemporary and enduring.
+                            </p>
+                        </div>
+
+                        <!-- Right Column (40-45%) -->
+                        <div class="w-full lg:w-[40%] space-y-10">
+                            <div>
+                                <h3 class="font-serif text-2xl mb-3">Purpose</h3>
+                                <p class="text-brand-stucco/70 text-sm leading-relaxed">
+                                    To create a brand that feels crafted, trustworthy, and rooted in timeless design
+                                    principles.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 class="font-serif text-2xl mb-3">Mission</h3>
+                                <p class="text-brand-stucco/70 text-sm leading-relaxed">
+                                    To help customers understand the value of skilled craftsmanship through clear
+                                    communication and consistent visual expression.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 class="font-serif text-2xl mb-3">Values</h3>
+                                <p class="text-brand-stucco/70 text-sm leading-relaxed">
+                                    We believe in simplicity, honesty, and attention to detail — qualities that guide
+                                    every decision in the brand’s identity.
+                                </p>
+                            </div>
+
+                            <div class="pt-8">
+                                <h3 class="font-serif text-2xl mb-6">Tagline Concepts</h3>
+                                <ul class="space-y-2 text-brand-stucco/80 font-serif italic text-lg">
+                                    <li>Crafted With Purpose.</li>
+                                    <li>Built to Last.</li>
+                                    <li>Where Design Meets Craft.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Tone of Voice -->
+            <section id="section-5" class="py-32 bg-brand-stucco text-brand-onyx relative overflow-hidden">
+                <div class="container mx-auto px-6 relative z-10">
+                    <!-- Header -->
+                    <div class="mb-20 text-center md:text-left" data-aos="fade-up">
+                        <h2 class="font-serif text-4xl md:text-5xl mb-4 text-brand-onyx">Tone of Voice</h2>
+                        <p class="text-xl text-brand-onyx/80 font-medium tracking-tight">
+                            A clear, confident, and human way of speaking.
+                        </p>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32" data-aos="fade-up">
+                        <!-- Do Column -->
+                        <div>
+                            <h3 class="font-serif text-3xl mb-8 text-brand-onyx border-b border-brand-onyx/20 pb-4">Do
+                            </h3>
+                            <ul class="space-y-4 text-brand-onyx/80 leading-relaxed list-none">
+                                <li class="pl-4 -indent-4">• Use simple, direct language that is easy for anyone to
+                                    understand.</li>
+                                <li class="pl-4 -indent-4">• Speak with confidence and clarity, without sounding
+                                    aggressive.</li>
+                                <li class="pl-4 -indent-4">• Focus on the customer’s needs, not internal jargon.</li>
+                                <li class="pl-4 -indent-4">• Explain ideas in a structured, calm, and helpful way.</li>
+                                <li class="pl-4 -indent-4">• Use warm, human phrasing that feels approachable.</li>
+                                <li class="pl-4 -indent-4">• Give direction through clear statements, not decorative
+                                    language.</li>
+                                <li class="pl-4 -indent-4">• Use storytelling when it helps someone understand the
+                                    meaning behind the brand.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Don't Column -->
+                        <div>
+                            <h3 class="font-serif text-3xl mb-8 text-brand-onyx border-b border-brand-onyx/20 pb-4">
+                                Don't</h3>
+                            <ul class="space-y-4 text-brand-onyx/80 leading-relaxed list-none">
+                                <li class="pl-4 -indent-4">• Don't use overly complex or academic sentences.</li>
+                                <li class="pl-4 -indent-4">• Don't speak in a salesy or exaggerated tone.</li>
+                                <li class="pl-4 -indent-4">• Don't use metaphors or emotional language that feels
+                                    disconnected from the brand.</li>
+                                <li class="pl-4 -indent-4">• Don't overload sentences with adjectives.</li>
+                                <li class="pl-4 -indent-4">• Don't shift between formal and casual tone inconsistently.
+                                </li>
+                                <li class="pl-4 -indent-4">• Don't use humour or slang unless it supports the brand’s
+                                    identity.</li>
+                                <li class="pl-4 -indent-4">• Don't rely on icons, labels, or colours to communicate tone
+                                    — let the text do the work.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Example Phrases -->
+                    <div class="mt-20 pt-12 border-t border-brand-onyx/10 text-center md:text-left" data-aos="fade-up">
+                        <h4 class="font-bold uppercase tracking-widest text-xs text-brand-walnut mb-6">Example Phrases
+                        </h4>
+                        <div class="space-y-2 font-serif text-xl md:text-2xl text-brand-onyx italic">
+                            <p>“We believe in clarity — every step should feel simple and purposeful.”</p>
+                            <p>“Our role is to guide, not overwhelm.”</p>
+                            <p>“Here’s what this means for you…”</p>
+                            <p>“Let’s make this easier to understand.”</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Colour Palette -->
+            <section id="section-6" class="py-32 bg-brand-onyx border-t border-brand-walnut/20">
+                <div class="container mx-auto px-6">
+                    <div class="flex items-baseline mb-12" data-aos="fade-up">
+                        <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">06</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-brand-stucco">Colour Palette</h2>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row h-auto lg:h-[500px] shadow-2xl rounded-lg overflow-hidden mb-12"
+                        data-aos="zoom-in">
+                        <!-- Hague Blue -->
+                        <div
+                            class="bg-brand-hague p-8 flex-1 flex flex-col justify-between text-white group relative overflow-hidden transition-all duration-500 hover:flex-[1.5] min-h-[200px] lg:min-h-0">
+                            <div
+                                class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                <span
+                                    class="text-xs uppercase tracking-widest border border-white/30 px-2 py-1 rounded">Primary</span>
+                            </div>
+                            <div
+                                class="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-4">
+                                <p class="font-serif text-2xl mb-2">Hague Blue</p>
+                                <p class="text-xs opacity-60 font-mono tracking-wider">#3D4E57</p>
+                            </div>
+                        </div>
+
+                        <!-- Drop Cloth -->
+                        <div
+                            class="bg-brand-dropcloth p-8 flex-1 flex flex-col justify-between text-brand-hague group relative overflow-hidden transition-all duration-500 hover:flex-[1.5] min-h-[200px] lg:min-h-0">
+                            <div
+                                class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                <span
+                                    class="text-xs uppercase tracking-widest border border-brand-hague/30 px-2 py-1 rounded">Primary</span>
+                            </div>
+                            <div
+                                class="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-4">
+                                <p class="font-serif text-2xl mb-2">Drop Cloth</p>
+                                <p class="text-xs opacity-60 font-mono tracking-wider">#C9BEAB</p>
+                            </div>
+                        </div>
+
+                        <!-- School House White -->
+                        <div
+                            class="bg-brand-schoolhouse p-8 flex-1 flex flex-col justify-between text-brand-hague group relative overflow-hidden transition-all duration-500 hover:flex-[1.5] min-h-[200px] lg:min-h-0">
+                            <div
+                                class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                <span
+                                    class="text-xs uppercase tracking-widest border border-brand-hague/30 px-2 py-1 rounded">Primary</span>
+                            </div>
+                            <div
+                                class="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-4">
+                                <p class="font-serif text-2xl mb-2">School House</p>
+                                <p class="text-xs opacity-60 font-mono tracking-wider">#E6DFD1</p>
+                            </div>
+                        </div>
+
+                        <!-- Sudbury Yellow -->
+                        <div
+                            class="bg-brand-sudbury p-8 flex-1 flex flex-col justify-between text-brand-hague group relative overflow-hidden transition-all duration-500 hover:flex-[1.5] min-h-[200px] lg:min-h-0">
+                            <div
+                                class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                <span
+                                    class="text-xs uppercase tracking-widest border border-brand-hague/30 px-2 py-1 rounded">Accent</span>
+                            </div>
+                            <div
+                                class="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-4">
+                                <p class="font-serif text-2xl mb-2">Sudbury</p>
+                                <p class="text-xs opacity-60 font-mono tracking-wider">#DCB771</p>
+                            </div>
+                        </div>
+
+                        <!-- Light Blue -->
+                        <div
+                            class="bg-brand-lightblue p-8 flex-1 flex flex-col justify-between text-brand-hague group relative overflow-hidden transition-all duration-500 hover:flex-[1.5] min-h-[200px] lg:min-h-0">
+                            <div
+                                class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                <span
+                                    class="text-xs uppercase tracking-widest border border-brand-hague/30 px-2 py-1 rounded">Support</span>
+                            </div>
+                            <div
+                                class="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-4">
+                                <p class="font-serif text-2xl mb-2">Light Blue</p>
+                                <p class="text-xs opacity-60 font-mono tracking-wider">#B8BCB5</p>
+                            </div>
+                        </div>
+
+                        <!-- Not Quite Black -->
+                        <div
+                            class="bg-brand-nqblack p-8 flex-1 flex flex-col justify-between text-white group relative overflow-hidden transition-all duration-500 hover:flex-[1.5] min-h-[200px] lg:min-h-0">
+                            <div
+                                class="opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                <span
+                                    class="text-xs uppercase tracking-widest border border-white/30 px-2 py-1 rounded">Text</span>
+                            </div>
+                            <div
+                                class="relative z-10 transform transition-transform duration-500 group-hover:-translate-y-4">
+                                <p class="font-serif text-2xl mb-2">NQ Black</p>
+                                <p class="text-xs opacity-60 font-mono tracking-wider">#222323</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-brand-stucco/60">
+                        <div class="border-t border-brand-stucco/10 pt-4">
+                            <strong class="text-brand-stucco block mb-2">Core Identity</strong>
+                            Hague Blue + Neutrals
+                        </div>
+                        <div class="border-t border-brand-stucco/10 pt-4">
+                            <strong class="text-brand-stucco block mb-2">Accents</strong>
+                            Yellow + Light Blue (Accents only)
+                        </div>
+                        <div class="border-t border-brand-stucco/10 pt-4">
+                            <strong class="text-brand-stucco block mb-2">Typography</strong>
+                            Not Quite Black
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Logo System -->
+            <section id="section-7" class="py-32 bg-brand-stucco text-brand-onyx overflow-hidden">
+                <div class="container mx-auto px-6">
+                    <!-- Section Title -->
+                    <div class="mb-14" data-aos="fade-up">
+                        <span class="text-brand-walnut/50 text-6xl font-serif font-light block mb-4">07</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-brand-onyx">Logo System</h2>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row gap-0 lg:gap-12">
+                        <!-- Left Column: Text & Rules (45-50%) -->
+                        <div class="w-full lg:w-1/2 pr-0 lg:pr-12 mb-12 lg:mb-0" data-aos="fade-right">
+                            <div class="space-y-16">
+                                <!-- Primary Logo Text -->
+                                <div>
+                                    <h3 class="font-serif text-2xl text-brand-onyx mb-4">Primary Logo</h3>
+                                    <p class="text-brand-onyx/70 text-base leading-relaxed">
+                                        The primary wordmark is the main identifier for The Elegant House.<br>
+                                        It represents the brand’s full expression — refined, calm, and rooted in
+                                        craftsmanship.
+                                    </p>
+                                </div>
+
+                                <!-- Stacked Logo Text -->
+                                <div>
+                                    <h3 class="font-serif text-2xl text-brand-onyx mb-4">Stacked Logo</h3>
+                                    <p class="text-brand-onyx/70 text-base leading-relaxed">
+                                        This alternate layout offers a more compact structure while maintaining elegance
+                                        and
+                                        legibility.<br>
+                                        It is ideal when space is limited but the brand still needs a premium presence.
+                                    </p>
+                                </div>
+
+                                <!-- Initial Mark Text -->
+                                <div>
+                                    <h3 class="font-serif text-2xl text-brand-onyx mb-4">Initial Mark “E” (Monogram)
+                                    </h3>
+                                    <p class="text-brand-onyx/70 text-base leading-relaxed">
+                                        The monogram is a simplified brand asset used when the full wordmark would be
+                                        too
+                                        detailed or overpowering.<br>
+                                        It preserves brand recognition in small spaces.
+                                    </p>
+                                </div>
+
+                                <!-- Usage Rules -->
+                                <div class="pt-8 border-t border-brand-onyx/10">
+                                    <h4 class="text-brand-walnut font-bold uppercase tracking-widest text-xs mb-6">
+                                        Important
+                                        Visual Rules</h4>
+                                    <ul class="space-y-3 text-brand-onyx/70 text-sm">
+                                        <li class="flex items-start">
+                                            <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-1.5"></span>
+                                            Background must be white, not cream.
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-1.5"></span>
+                                            Logos must be in Hague Blue (#3D4E57).
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-1.5"></span>
+                                            Spacing inside the logo panel: 48–72px padding.
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-1.5 h-1.5 bg-brand-walnut rounded-full mr-3 mt-1.5"></span>
+                                            No harsh shadows — keep it high-end editorial.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Logo Display (50-55%) -->
+                        <div class="w-full lg:w-1/2" data-aos="fade-left">
+                            <div
+                                class="bg-white p-12 md:p-16 shadow-lg shadow-brand-onyx/5 flex flex-col items-center justify-center space-y-16 rounded-sm">
+                                <!-- Primary Logo -->
+                                <div class="w-full flex justify-center">
+                                    <img src="images/primerylogoforlogosystem.png" alt="Primary Logo"
+                                        class="w-full max-w-[280px] h-auto object-contain">
+                                </div>
+
+                                <!-- Stacked Logo -->
+                                <div class="w-full flex justify-center">
+                                    <img src="images/stackedlogoforlogosystems.png" alt="Stacked Logo"
+                                        class="h-[180px] w-auto object-contain">
+                                </div>
+
+                                <!-- Initial Mark -->
+                                <div class="w-full flex justify-center">
+                                    <img src="images/initialmarkelogoforlogosystem.png" alt="Initial Mark"
+                                        class="h-[140px] w-auto object-contain">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Brand Guidelines Hub -->
+            <section id="section-8" class="py-32 bg-brand-onyx text-brand-stucco relative z-20">
+                <div class="container mx-auto px-6">
+                    <div class="flex items-center justify-between mb-20" data-aos="fade-up">
+                        <div>
+                            <div class="flex items-baseline mb-6">
+                                <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">08</span>
+                                <h2 class="text-4xl md:text-5xl font-serif">Brand Guidelines</h2>
+                            </div>
+                            <p class="text-brand-stucco/60 max-w-xl">
+                                A comprehensive system ensuring consistency across all brand touchpoints.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Card 1: Logo Rules -->
+                        <a href="brand-guidelines-logo.html"
+                            class="group bg-brand-stucco/5 p-8 border border-brand-stucco/10 hover:bg-brand-stucco/10 hover:border-brand-stucco/30 transition-all duration-300"
+                            data-aos="fade-up" data-aos-delay="100">
+                            <div class="mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="layout-grid" class="w-8 h-8 text-brand-stucco"></i>
+                            </div>
+                            <h3 class="font-serif text-xl mb-2 group-hover:text-white transition-colors">Logo Rules</h3>
+                            <p class="text-sm text-brand-stucco/50 group-hover:text-brand-stucco/80 transition-colors">
+                                Usage,
+                                clear space & misuse</p>
+                        </a>
+
+                        <!-- Card 2: Typography -->
+                        <a href="brand-guidelines-typography.html"
+                            class="group bg-brand-stucco/5 p-8 border border-brand-stucco/10 hover:bg-brand-stucco/10 hover:border-brand-stucco/30 transition-all duration-300"
+                            data-aos="fade-up" data-aos-delay="200">
+                            <div class="mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="type" class="w-8 h-8 text-brand-stucco"></i>
+                            </div>
+                            <h3 class="font-serif text-xl mb-2 group-hover:text-white transition-colors">Typography</h3>
+                            <p class="text-sm text-brand-stucco/50 group-hover:text-brand-stucco/80 transition-colors">
+                                Typefaces, hierarchy & scale</p>
+                        </a>
+
+                        <!-- Card 3: Photography -->
+                        <a href="brand-guidelines-photography.html"
+                            class="group bg-brand-stucco/5 p-8 border border-brand-stucco/10 hover:bg-brand-stucco/10 hover:border-brand-stucco/30 transition-all duration-300"
+                            data-aos="fade-up" data-aos-delay="300">
+                            <div class="mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="camera" class="w-8 h-8 text-brand-stucco"></i>
+                            </div>
+                            <h3 class="font-serif text-xl mb-2 group-hover:text-white transition-colors">Photography
+                            </h3>
+                            <p class="text-sm text-brand-stucco/50 group-hover:text-brand-stucco/80 transition-colors">
+                                Art direction, lighting & composition</p>
+                        </a>
+
+                        <!-- Card 4: Layouts -->
+                        <a href="brand-guidelines-layouts.html"
+                            class="group bg-brand-stucco/5 p-8 border border-brand-stucco/10 hover:bg-brand-stucco/10 hover:border-brand-stucco/30 transition-all duration-300"
+                            data-aos="fade-up" data-aos-delay="400">
+                            <div class="mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <i data-lucide="layout" class="w-8 h-8 text-brand-stucco"></i>
+                            </div>
+                            <h3 class="font-serif text-xl mb-2 group-hover:text-white transition-colors">Layouts</h3>
+                            <p class="text-sm text-brand-stucco/50 group-hover:text-brand-stucco/80 transition-colors">
+                                Grids, spacing & composition</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 9: Application & Rollout -->
+            <section id="section-9" class="py-32 bg-brand-stucco text-brand-onyx">
+                <div class="container mx-auto px-6">
+                    <div class="flex items-baseline mb-12" data-aos="fade-up">
+                        <span class="text-brand-onyx text-6xl font-serif opacity-20 mr-6 font-light">09</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-brand-onyx">Application & Rollout</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <a href="brand-guidelines-digital.html"
+                            class="group relative overflow-hidden aspect-[4/5] block" data-aos="fade-up">
+                            <img src="images/digitalpresence1.png" alt="Website Preview"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-serif text-2xl">Digital Presence</span>
+                            </div>
+                        </a>
+                        <a href="brand-guidelines-print.html" class="group relative overflow-hidden aspect-[4/5] block"
+                            data-aos="fade-up" data-aos-delay="100">
+                            <img src="images/print collateral.png" alt="Print Collateral"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-serif text-2xl">Print Collateral</span>
+                            </div>
+                        </a>
+                        <a href="brand-guidelines-signage.html"
+                            class="group relative overflow-hidden aspect-[4/5] block" data-aos="fade-up"
+                            data-aos-delay="200">
+                            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1000&auto=format&fit=crop"
+                                alt="Signage"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div
+                                class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-serif text-2xl">Signage & Environment</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 10 & 11: Implementation & Summary -->
+            <section id="section-10" class="py-32 bg-brand-onyx text-brand-stucco border-t border-brand-walnut/20">
+                <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                        <!-- Implementation -->
+                        <div data-aos="fade-right">
+                            <div class="flex items-baseline mb-8">
+                                <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">10</span>
+                                <h2 class="text-4xl font-serif">Implementation & Support</h2>
+                            </div>
+                            <p class="text-brand-stucco/80 mb-8">Ongoing support included ensuring brand consistency,
+                                refining
+                                website content, creating additional assets, and advising on photography style.</p>
+                            <ul class="space-y-3 text-sm text-brand-stucco/70">
+                                <li class="flex items-center"><i data-lucide="check-circle"
+                                        class="w-5 h-5 text-brand-walnut mr-3"></i> Brand consistency checks</li>
+                                <li class="flex items-center"><i data-lucide="check-circle"
+                                        class="w-5 h-5 text-brand-walnut mr-3"></i> Content refinement</li>
+                                <li class="flex items-center"><i data-lucide="check-circle"
+                                        class="w-5 h-5 text-brand-walnut mr-3"></i> Photography direction</li>
+                            </ul>
+                        </div>
+
+                        <!-- Summary -->
+                        <div id="section-11" data-aos="fade-left">
+                            <div class="flex items-baseline mb-8">
+                                <span class="text-brand-walnut text-6xl font-serif opacity-20 mr-6 font-light">11</span>
+                                <h2 class="text-4xl font-serif">Project Summary</h2>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-brand-walnut text-xs font-bold uppercase tracking-widest mb-3">What
+                                        Changed
+                                    </h4>
+                                    <ul class="text-sm text-brand-stucco/70 space-y-1">
+                                        <li>From inconsistent → Polished</li>
+                                        <li>From unclear → Confident</li>
+                                        <li>From basic → Premium</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-brand-walnut text-xs font-bold uppercase tracking-widest mb-3">
+                                        Client
+                                        Achievement</h4>
+                                    <ul class="text-sm text-brand-stucco/70 space-y-1">
+                                        <li>Ready-to-scale brand</li>
+                                        <li>Higher credibility</li>
+                                        <li>Consistent identity</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 pt-8 border-t border-brand-stucco/10">
+                                <h4 class="text-brand-walnut text-xs font-bold uppercase tracking-widest mb-3">Delivered
+                                </h4>
+                                <p class="text-lg font-serif italic">End-to-end brand strategy, Identity system,
+                                    Real-world
+                                    brand rollout.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer id="contact" class="bg-brand-onyx pt-12 pb-12 relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-walnut/20 to-transparent">
+                </div>
+
+                <div class="container mx-auto px-6 text-center relative z-10">
+                    <div
+                        class="mt-12 border-t border-brand-walnut/20 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-brand-ash uppercase tracking-widest font-medium">
+                        <div class="mb-6 md:mb-0">
+                            &copy; 2024 Zuher Alrifai. All Rights Reserved.
+                        </div>
+                        <div class="flex space-x-12">
+                            <a href="mailto:zuher.alrifai14@icloud.com"
+                                class="hover:text-brand-walnut transition-colors relative group">
+                                Email
+                                <span
+                                    class="absolute -bottom-2 left-0 w-0 h-px bg-brand-walnut transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/zuher-alrifai-037320391" target="_blank"
+                                class="hover:text-brand-walnut transition-colors relative group">
+                                LinkedIn
+                                <span
+                                    class="absolute -bottom-2 left-0 w-0 h-px bg-brand-walnut transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#" class="hover:text-brand-walnut transition-colors relative group">
+                                Instagram
+                                <span
+                                    class="absolute -bottom-2 left-0 w-0 h-px bg-brand-walnut transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+            <script>
+                // --- CRITICAL: Preloader Removal Logic (Defined first) ---
+                function removePreloader() {
+                    const preloader = document.getElementById('preloader');
+                    if (preloader && preloader.style.display !== 'none') {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                            // Refresh animations after layout stabilizes
+                            if (typeof AOS !== 'undefined') AOS.refresh();
+                            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+                        }, 500);
+                    }
+                }
+
+                // Failsafes to ensure preloader is removed
+                window.addEventListener('load', removePreloader);
+                setTimeout(removePreloader, 3000); // Force remove after 3s max
+
+                // --- Main Initialization ---
+                document.addEventListener('DOMContentLoaded', () => {
+
+                    // 1. Initialize Lenis (Smooth Scroll)
+                    try {
+                        const lenis = new Lenis({
+                            duration: 1.2,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                            direction: 'vertical',
+                            gestureDirection: 'vertical',
+                            smooth: true,
+                            mouseMultiplier: 1,
+                            smoothTouch: false,
+                            touchMultiplier: 2,
+                        });
+
+                        function raf(time) {
+                            lenis.raf(time);
+                            requestAnimationFrame(raf);
+                        }
+                        requestAnimationFrame(raf);
+                    } catch (e) { console.warn("Lenis init failed:", e); }
+
+                    // 2. Initialize AOS
+                    try {
+                        AOS.init({
+                            once: true,
+                            offset: 50,
+                            duration: 1000,
+                            easing: 'ease-out-cubic',
+                        });
+                    } catch (e) { console.warn("AOS init failed:", e); }
+
+                    // 3. Initialize Icons
+                    try {
+                        lucide.createIcons();
+                    } catch (e) { console.warn("Lucide init failed:", e); }
+
+                    // 4. Custom Cursor Logic
+                    try {
+                        const cursorDot = document.querySelector('.cursor-dot');
+                        const cursorOutline = document.querySelector('.cursor-outline');
+
+                        if (window.matchMedia("(pointer: fine) and (min-width: 768px)").matches && cursorDot && cursorOutline) {
+                            document.body.classList.add('has-custom-cursor');
+
+                            window.addEventListener('mousemove', (e) => {
+                                const posX = e.clientX;
+                                const posY = e.clientY;
+
+                                // Dot follows instantly
+                                cursorDot.style.left = `${posX}px`;
+                                cursorDot.style.top = `${posY}px`;
+
+                                // Outline follows with delay/animation
+                                cursorOutline.animate({
+                                    left: `${posX}px`,
+                                    top: `${posY}px`
+                                }, { duration: 500, fill: "forwards" });
+                            });
+
+                            // Hover effects
+                            const hoverTargets = document.querySelectorAll('a, button, .hover-target');
+                            hoverTargets.forEach(target => {
+                                target.addEventListener('mouseenter', () => {
+                                    cursorOutline.classList.add('hovered');
+                                });
+                                target.addEventListener('mouseleave', () => {
+                                    cursorOutline.classList.remove('hovered');
+                                });
+                            });
+                        }
+                    } catch (e) { console.warn("Cursor init failed:", e); }
+
+                    // 5. GSAP Animations
+                    try {
+                        gsap.registerPlugin(ScrollTrigger);
+
+                        // Hero Parallax
+                        gsap.to(".parallax-bg", {
+                            yPercent: 30,
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: "header",
+                                start: "top top",
+                                end: "bottom top",
+                                scrub: true
+                            },
+                        });
+
+                        // Reveal Text Animation
+                        const splitTypes = document.querySelectorAll('.reveal-type');
+                        splitTypes.forEach((char, i) => {
+                            if (char) {
+                                const text = new SplitType(char, { types: 'chars' });
+                                gsap.from(text.chars, {
+                                    scrollTrigger: {
+                                        trigger: char,
+                                        start: 'top 80%',
+                                        end: 'top 20%',
+                                        scrub: true,
+                                        markers: false
+                                    },
+                                    y: 100,
+                                    opacity: 0,
+                                    stagger: 0.05
+                                });
+                            }
+                        });
+                    } catch (e) { console.warn("GSAP init failed:", e); }
+                });
+            </script>
+</body>
+
+</html>

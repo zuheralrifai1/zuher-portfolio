@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <style>
+      .bg { fill: none; }
+      .roof { fill: #caa14f; }
+      .body { fill: #17334a; }
+      .accent { fill: #ffffff; }
+      .text-primary { fill: #17334a; font-family: Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: 6px; }
+      .text-secondary { fill: #17334a; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: 2px; }
+    </style>
+  </defs>
+
+  <!-- Background safe area (transparent) -->
+  <rect class="bg" width="1200" height="1200" />
+
+  <!-- House mark (centered near top) -->
+  <g id="house" transform="translate(300,120)">
+    <!-- Roof -->
+    <path class="roof" d="M300 0 L600 220 L0 220 Z" />
+    <!-- Body -->
+    <rect class="body" x="120" y="220" width="360" height="300" rx="18" />
+    <!-- Door -->
+    <rect class="accent" x="280" y="360" width="40" height="160" rx="8" />
+    <!-- Window left -->
+    <rect class="accent" x="160" y="280" width="64" height="64" rx="6" />
+    <!-- Window right -->
+    <rect class="accent" x="376" y="280" width="64" height="64" rx="6" />
+    <!-- Subtle roof line for elegance -->
+    <path d="M60 220 L600 220" stroke="#b08b40" stroke-width="6" opacity="0.14" fill="none" />
+  </g>
+
+  <!-- Stacked text: LINE 1 (smallcaps-ish) and LINE 2 (larger) -->
+  <g id="text" transform="translate(0,560)">
+    <text x="600" y="140" text-anchor="middle" class="text-secondary" style="font-size:56px; text-transform:uppercase;">THE ELEGANT</text>
+    <text x="600" y="260" text-anchor="middle" class="text-primary" style="font-size:120px;">HOUSE</text>
+  </g>
+
+  <!-- Optional decorative divider -->
+  <g transform="translate(280,840)">
+    <rect x="0" y="0" width="640" height="2" fill="#caa14f" opacity="0.9" />
+  </g>
+
+  <!-- Accessibility title -->
+  <title>The Elegant House — stacked logo</title>
+</svg>

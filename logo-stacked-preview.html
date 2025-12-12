@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Logo Stacked Preview</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f8f8f8; color:#222; padding:32px; }
+    .sample { background:white; border-radius:8px; padding:24px; display:inline-block; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    .row { display:flex; gap:28px; align-items:center; }
+    .label { width:160px; color:#666; font-size:14px; }
+  </style>
+</head>
+<body>
+  <h1>Stacked Logo Preview</h1>
+  <p>Files added: <code>logo-stacked.svg</code>. Use this page to preview sizes.</p>
+
+  <div class="row">
+    <div class="label">Large (300px)</div>
+    <div class="sample"><img src="./logo-stacked.svg" width="300" alt="Logo large"></div>
+  </div>
+
+  <div class="row" style="margin-top:16px;">
+    <div class="label">Medium (200px)</div>
+    <div class="sample"><img src="./logo-stacked.svg" width="200" alt="Logo medium"></div>
+  </div>
+
+  <div class="row" style="margin-top:16px;">
+    <div class="label">Small (120px)</div>
+    <div class="sample"><img src="./logo-stacked.svg" width="120" alt="Logo small"></div>
+  </div>
+
+  <hr style="margin:28px 0;">
+  <h2>Notes & next steps</h2>
+  <ul>
+    <li>To export to PNG: use Inkscape or ImageMagick/inkscape command-line tools (examples below).</li>
+    <li>If you want different colors, fonts, or the exact original mark, tell me which to tweak and I'll update the SVG.</li>
+  </ul>
+
+  <h3>Export commands (PowerShell)</h3>
+  <pre><code># Inkscape (v1+)
+inksape --export-type=png --export-width=1200 logo-stacked.svg -o logo-stacked-1200.png
+# If Inkscape command is `inkscape.exe` on Windows, use full path or ensure it's on PATH
+
+# ImageMagick (if it supports SVG on your system)
+magick convert -background none logo-stacked.svg -resize 1200x logo-stacked-1200.png
+</code></pre>
+
+</body>
+</html>

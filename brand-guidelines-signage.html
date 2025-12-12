@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signage & Environment Guidelines | The Elegant House</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            onyx: '#1C1C1B',
+                            walnut: '#6A5D52',
+                            stucco: '#E2E2DE',
+                            greige: '#B7AC9B',
+                            hague: '#3D4E57',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1C1C1B;
+            color: #E2E2DE;
+        }
+
+        /* Onyx BG */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        :root {
+            --cursor-size: 20px;
+        }
+
+        /* Custom Cursor */
+        body.has-custom-cursor {
+            cursor: none !important;
+        }
+
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 2147483647;
+            pointer-events: none;
+            /* mix-blend-mode removed for Safari stability */
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-walnut selection:text-white">
+    <!-- Preloader -->
+    <div id="preloader"
+        class="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-white font-serif text-2xl animate-pulse">ZUHER ALRIFAI</div>
+    </div>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Back to Project Link -->
+    <div class="fixed top-8 left-8 z-50 mix-blend-difference">
+        <a href="project-elegant-house.html#section-8"
+            class="flex items-center text-brand-stucco hover:text-brand-walnut transition-colors group">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"></i>
+            <span class="text-sm tracking-widest uppercase">Back</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen py-20 px-6 md:px-12">
+        <div class="container mx-auto max-w-[1100px]"> <!-- Max width 1100-1200px requested -->
+
+            <!-- Top Heading Block -->
+            <header class="mb-[32px] pt-[48px] fade-up">
+                <h1 class="font-serif text-[32px] md:text-[40px] text-brand-stucco mb-6">Signage & Environment</h1>
+                <p class="font-sans text-[18px] md:text-[20px] text-brand-stucco/90 font-medium mb-8">How the brand
+                    appears across real-world touchpoints.</p>
+                <div class="w-full h-px bg-brand-greige opacity-25 mb-8"></div>
+            </header>
+
+            <!-- SECTION 1 — Overview Paragraph -->
+            <section class="mb-[56px] flex justify-center fade-up">
+                <div class="w-[70%] text-center">
+                    <p class="font-sans text-[18px] text-brand-stucco leading-relaxed">
+                        Signage and environmental branding bring The Elegant House identity into real physical spaces —
+                        from the workshop to on-the-road visibility. Every touchpoint strengthens trust, expresses
+                        craftsmanship, and ensures the brand feels established, premium, and consistent wherever it
+                        appears.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 2 — Workshop Wall Branding -->
+            <section class="flex flex-col md:flex-row gap-10 items-center mb-[72px] fade-up">
+                <!-- Left Column: Image (60%) -->
+                <div class="w-full md:w-[60%]">
+                    <img src="images/workshop.png" alt="Workshop Wall Branding"
+                        class="w-full h-auto max-h-[500px] object-cover rounded-[6px] shadow-2xl shadow-black/20">
+                </div>
+
+                <!-- Right Column: Text (40%) -->
+                <div class="w-full md:w-[40%]">
+                    <h3 class="font-serif text-[28px] text-brand-stucco mb-4">Workshop Environment Branding</h3>
+                    <p class="font-sans text-[18px] text-brand-stucco/80 mb-8 leading-relaxed">
+                        Branding inside the workshop reinforces professionalism and pride in craftsmanship. The
+                        wall-applied wordmark provides a calm, authoritative presence without overwhelming the space.
+                    </p>
+                    <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-4">Design Principles</h4>
+                    <ul class="space-y-3 font-sans text-brand-stucco/70 text-sm">
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Use the wordmark
+                            only in Hague Blue (#3D4E57) for clarity</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Maintain generous
+                            white space around the logo</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Keep placement
+                            subtle and aligned to eye level</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 3 — Vehicle Signage -->
+            <section class="flex flex-col md:flex-row gap-10 items-center mb-[72px] fade-up">
+                <!-- Left Column: Text (40%) - Swapped -->
+                <div class="w-full md:w-[40%] order-2 md:order-1">
+                    <h3 class="font-serif text-[28px] text-brand-stucco mb-4">Vehicle Signage</h3>
+                    <p class="font-sans text-[18px] text-brand-stucco/80 mb-8 leading-relaxed">
+                        The Elegant House vehicle branding extends visibility across local areas and reinforces trust
+                        during home visits. The clean white wordmark contrasts clearly against the dark vehicle surface,
+                        ensuring maximum readability.
+                    </p>
+                    <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-4">Design Principles</h4>
+                    <ul class="space-y-3 font-sans text-brand-stucco/70 text-sm">
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Use only white for
+                            vehicle branding</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Preserve large clear
+                            space around text</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>
+                            <div>
+                                Keep typographic hierarchy consistent:<br>
+                                – Wordmark large<br>
+                                – Tagline medium<br>
+                                – Contact details smaller
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right Column: Image (60%) - Swapped -->
+                <div class="w-full md:w-[60%] order-1 md:order-2 fade-in-right">
+                    <img src="images/vansignage.png" alt="Vehicle Signage"
+                        class="w-full h-auto max-h-[500px] object-cover rounded-[6px] shadow-2xl shadow-black/20">
+                </div>
+            </section>
+
+            <!-- SECTION 4 — Branded Workshop Apron -->
+            <section class="flex flex-col md:flex-row gap-10 items-center mb-[72px] fade-up">
+                <!-- Left Column: Image (60%) -->
+                <div class="w-full md:w-[60%]">
+                    <img src="images/apron.png" alt="Branded Workshop Apron"
+                        class="w-full h-auto max-h-[500px] object-cover rounded-[6px] shadow-2xl shadow-black/20">
+                </div>
+
+                <!-- Right Column: Text (40%) -->
+                <div class="w-full md:w-[40%]">
+                    <h3 class="font-serif text-[28px] text-brand-stucco mb-4">Workshop Apparel Branding</h3>
+                    <p class="font-sans text-[18px] text-brand-stucco/80 mb-8 leading-relaxed">
+                        The apron design uses leather and warm, natural materials to reflect the craft-focused identity
+                        of The Elegant House. The embossed-style logo reinforces heritage and creates a premium tactile
+                        impression.
+                    </p>
+                    <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-4">Design Principles</h4>
+                    <ul class="space-y-3 font-sans text-brand-stucco/70 text-sm">
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Use materials that
+                            feel authentic: leather, canvas, stitched details</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Place the wordmark
+                            prominently but tastefully</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Avoid overly
+                            commercial or glossy print finishes</li>
+                        <li class="flex items-start"><span
+                                class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5"></span>Keep colour palette:
+                            warm neutrals + Hague Blue</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 5 — Applications Summary Box -->
+            <section class="w-full bg-brand-walnut/25 p-10 rounded-[10px] text-center mb-[64px] fade-up">
+                <h3 class="font-serif text-[24px] text-brand-stucco mb-6">Where Signage & Environmental Branding Is
+                    Applied</h3>
+                <ul class="font-sans text-brand-stucco/80 leading-loose">
+                    <li>Workshop interiors (walls, tools, storage areas)</li>
+                    <li>Employee apparel (aprons, tags, uniforms)</li>
+                    <li>Vehicle branding for mobile visibility</li>
+                    <li>Customer-facing areas within the workshop</li>
+                    <li>Delivery presentation & setup environments</li>
+                </ul>
+            </section>
+
+            <!-- FINAL FOOTER -->
+            <footer class="text-center pb-[96px] fade-up">
+                <p class="font-serif text-[22px] text-brand-stucco w-[70%] mx-auto leading-relaxed">
+                    “Environmental branding brings The Elegant House identity into the physical world, reinforcing
+                    craftsmanship, heritage, and trust at every customer touchpoint.”
+                </p>
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+        // Preloader Logic
+        function removePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+                }, 500);
+            }
+        }
+        window.addEventListener('load', removePreloader);
+        setTimeout(removePreloader, 3000);
+
+        // Custom Cursor Logic
+        try {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            // Relaxed condition: Check only for non-mobile width to ensure Safari desktop gets it
+            if (window.innerWidth >= 768 && cursorDot && cursorOutline) {
+                document.body.classList.add('has-custom-cursor');
+
+                window.addEventListener('mousemove', (e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+
+                    // Use GSAP for better Safari compatibility
+                    gsap.to(cursorOutline, {
+                        left: posX,
+                        top: posY,
+                        duration: 0.5,
+                        ease: "power2.out"
+                    });
+                });
+
+                const hoverTargets = document.querySelectorAll('a, button, .hover-target');
+                hoverTargets.forEach(target => {
+                    target.addEventListener('mouseenter', () => {
+                        cursorOutline.classList.add('hovered');
+                    });
+                    target.addEventListener('mouseleave', () => {
+                        cursorOutline.classList.remove('hovered');
+                    });
+                });
+            }
+        } catch (e) { console.warn("Cursor init failed:", e); }
+
+        // Init Icons
+        lucide.createIcons();
+
+        // Init Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // General Fade Up
+        gsap.utils.toArray('.fade-up').forEach((elem, i) => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+
+        // Specific Fade In Right for Vehicle Section
+        gsap.utils.toArray('.fade-in-right').forEach((elem, i) => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 85%",
+                },
+                x: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Guidelines | The Elegant House</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            onyx: '#1C1C1B',
+                            walnut: '#6A5D52',
+                            stucco: '#E2E2DE',
+                            greige: '#B7AC9B',
+                            hague: '#3D4E57',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1C1C1B;
+            color: #E2E2DE;
+        }
+
+        /* Onyx BG */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        /* Custom Cursor */
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body.has-custom-cursor {
+            cursor: none;
+        }
+
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-walnut selection:text-white">
+    <!-- Preloader -->
+    <div id="preloader"
+        class="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-white font-serif text-2xl animate-pulse">ZUHER ALRIFAI</div>
+    </div>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Back to Project Link -->
+    <div class="fixed top-8 left-8 z-50 mix-blend-difference">
+        <a href="project-elegant-house.html#section-8"
+            class="flex items-center text-brand-stucco hover:text-brand-walnut transition-colors group">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"></i>
+            <span class="text-sm tracking-widest uppercase">Back</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen py-24 px-6 md:px-12">
+        <div class="container mx-auto max-w-[1100px]"> <!-- Max width 1100-1200px requested -->
+
+            <!-- Heading Block -->
+            <!-- 64px padding top added via py-24 on main generally covers it, but let's be precise if needed -->
+            <header class="mb-12 pt-16 fade-up">
+                <h1 class="font-serif text-[32px] md:text-[40px] text-brand-stucco mb-2">Photography Guidelines</h1>
+                <p class="font-sans text-[18px] md:text-[20px] text-brand-stucco/80 mb-10">A visual direction for how
+                    The Elegant House should be photographed.</p>
+
+                <div class="w-full h-px bg-brand-greige opacity-25 mb-12"></div>
+            </header>
+
+            <!-- Section 1: Photography Direction -->
+            <section class="max-w-[750px] mx-auto text-center mb-14 fade-up">
+                <p class="font-serif text-[24px] md:text-[28px] text-brand-stucco leading-relaxed">
+                    The Elegant House photography style is warm, natural, and craft-focused. Images should feel
+                    timeless, calm, and authentic — never staged or artificial. The goal is to showcase detail, texture,
+                    and atmosphere in real spaces, using soft natural light and simple compositions.
+                </p>
+            </section>
+
+            <!-- Section 2: "Do" Photos -->
+            <section class="mb-16">
+                <!-- Grid -->
+                <!-- 3-image horizontal grid, equal width, 24px spacing -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="aspect-[4/5] overflow-hidden bg-brand-stucco/5 photo-item">
+                        <img src="images/dophotography1.png" alt="Do: Chair with green upholstery"
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]">
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden bg-brand-stucco/5 photo-item">
+                        <img src="images/dophotography2.png" alt="Do: Detail of pineapple embroidery"
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]">
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden bg-brand-stucco/5 photo-item">
+                        <img src="images/dophotography3.png" alt="Do: Pink chair by fireplace"
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]">
+                    </div>
+                </div>
+
+                <!-- Caption Block -->
+                <div class="text-center max-w-[750px] mx-auto fade-up">
+                    <h3 class="font-serif text-[24px] md:text-[26px] text-brand-stucco mb-4">Do — The Ideal Style</h3>
+                    <ul
+                        class="font-sans text-[16px] md:text-[18px] text-brand-stucco/80 leading-[1.5] space-y-1 list-none">
+                        <li>Use soft, natural lighting.</li>
+                        <li>Focus on detail, texture, and craftsmanship.</li>
+                        <li>Photograph pieces in real, inviting environments.</li>
+                        <li>Highlight the quality of materials and the atmosphere of the space.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 3: "Don't" Photos -->
+            <section class="mb-20">
+                <!-- Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="aspect-[4/5] overflow-hidden bg-brand-stucco/5 photo-item">
+                        <img src="images/donotphotography1.png" alt="Don't: Harsh lighting"
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02] opacity-80 hover:opacity-100">
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden bg-brand-stucco/5 photo-item">
+                        <img src="images/donotphotography2.png" alt="Don't: Awkward corner"
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02] opacity-80 hover:opacity-100">
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden bg-brand-stucco/5 photo-item">
+                        <img src="images/donotphotography3.png" alt="Don't: Cluttered background"
+                            class="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02] opacity-80 hover:opacity-100">
+                    </div>
+                </div>
+
+                <!-- Caption Block -->
+                <div class="text-center max-w-[750px] mx-auto fade-up">
+                    <h3 class="font-serif text-[24px] md:text-[26px] text-brand-stucco mb-4">Don’t — Avoid These Styles
+                    </h3>
+                    <ul
+                        class="font-sans text-[16px] md:text-[18px] text-brand-stucco/80 leading-[1.5] space-y-1 list-none">
+                        <li>Avoid harsh or artificial lighting.</li>
+                        <li>Do not photograph furniture in empty, unbalanced spaces.</li>
+                        <li>Avoid cluttered backgrounds and distracting compositions.</li>
+                        <li>Never use images that feel overly staged, trendy, or low-quality.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center border-t border-brand-greige/25 pt-12 pb-20 fade-up">
+                <p
+                    class="font-serif text-[22px] md:text-[26px] text-brand-stucco/60 italic max-w-3xl mx-auto leading-relaxed">
+                    “Photography brings The Elegant House brand to life by capturing craftsmanship, warmth, and
+                    authentic detail in every image.”
+                </p>
+                <div class="mt-12 text-xs tracking-widest uppercase text-brand-stucco/30">
+                    &copy; 2024 The Elegant House. All Rights Reserved.
+                </div>
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+        // Preloader Logic
+        function removePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+                }, 500);
+            }
+        }
+        window.addEventListener('load', removePreloader);
+        setTimeout(removePreloader, 3000);
+
+        // Custom Cursor Logic
+        try {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            if (window.matchMedia("(pointer: fine) and (min-width: 768px)").matches && cursorDot && cursorOutline) {
+                document.body.classList.add('has-custom-cursor');
+
+                window.addEventListener('mousemove', (e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+                    cursorOutline.animate({
+                        left: `${posX}px`,
+                        top: `${posY}px`
+                    }, { duration: 500, fill: "forwards" });
+                });
+
+                const hoverTargets = document.querySelectorAll('a, button, .hover-target');
+                hoverTargets.forEach(target => {
+                    target.addEventListener('mouseenter', () => {
+                        cursorOutline.classList.add('hovered');
+                    });
+                    target.addEventListener('mouseleave', () => {
+                        cursorOutline.classList.remove('hovered');
+                    });
+                });
+            }
+        } catch (e) { console.warn("Cursor init failed:", e); }
+
+        // Init Icons
+        lucide.createIcons();
+
+        // Init Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Header & Intro Text: Fade in and move up 10-20px
+        gsap.utils.toArray('.fade-up').forEach((elem, i) => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%",
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.7,
+                ease: "power2.out",
+                delay: i * 0.1 // Slight stagger naturally if they appear together
+            });
+        });
+
+        // Photo Grids: Staggered fade in
+        // Select groups of photos
+        document.querySelectorAll('.grid').forEach(grid => {
+            gsap.from(grid.querySelectorAll('.photo-item'), {
+                scrollTrigger: {
+                    trigger: grid,
+                    start: "top 85%",
+                },
+                y: 15,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15, // 150ms delay between items
+                ease: "power2.out"
+            });
+        });
+
+    </script>
+</body>
+
+</html>

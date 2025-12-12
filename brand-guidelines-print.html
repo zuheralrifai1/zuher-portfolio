@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Collateral Guidelines | The Elegant House</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            onyx: '#1C1C1B',
+                            walnut: '#6A5D52',
+                            stucco: '#E2E2DE',
+                            greige: '#B7AC9B',
+                            hague: '#3D4E57',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1C1C1B;
+            color: #E2E2DE;
+        }
+
+        /* Onyx BG */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        :root {
+            --cursor-size: 20px;
+        }
+
+        /* Custom Cursor */
+        body.has-custom-cursor {
+            cursor: none !important;
+        }
+
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            /* mix-blend-mode removed for Safari stability */
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: white;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-walnut selection:text-white">
+    <!-- Preloader -->
+    <div id="preloader"
+        class="fixed inset-0 z-[100] bg-[#0a0a0a] flex items-center justify-center transition-opacity duration-500">
+        <div class="text-white font-serif text-2xl animate-pulse">ZUHER ALRIFAI</div>
+    </div>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Back to Project Link -->
+    <div class="fixed top-8 left-8 z-50 mix-blend-difference">
+        <a href="project-elegant-house.html#section-8"
+            class="flex items-center text-brand-stucco hover:text-brand-walnut transition-colors group">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"></i>
+            <span class="text-sm tracking-widest uppercase">Back</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen py-20 px-6 md:px-12">
+        <div class="container mx-auto max-w-[1100px]"> <!-- Max width 1100-1200px requested -->
+
+            <!-- 2. Hero Section (Top of Page) -->
+            <header class="mb-16 pt-20 fade-up">
+                <h1 class="font-serif text-[32px] md:text-[40px] text-brand-stucco mb-6">Print Collateral</h1>
+                <h2 class="font-sans text-[18px] md:text-[20px] text-brand-stucco/90 font-medium mb-6">How the brand
+                    identity translates into physical, printed touchpoints.</h2>
+                <p class="font-sans text-[16px] md:text-[18px] text-brand-stucco/70 leading-relaxed max-w-3xl mb-10">
+                    Print materials were designed to enhance the brand’s premium positioning and provide a clear,
+                    consistent experience across offline interactions. The focus was on quality, readability, and
+                    tactile detail.
+                </p>
+                <div class="w-full h-px bg-brand-greige opacity-25 mb-10"></div>
+            </header>
+
+            <!-- 3. SECTION A — Business Cards -->
+            <section class="flex flex-col md:flex-row gap-12 lg:gap-24 mb-24 fade-up">
+                <!-- Left Column: Text (50%) -->
+                <div class="w-full md:w-1/2">
+                    <h3 class="font-serif text-[28px] text-brand-stucco mb-6">Business Cards</h3>
+                    <p class="font-sans text-brand-stucco/80 mb-8 leading-relaxed">
+                        The Elegant House business cards were designed as a compact expression of the brand – tactile,
+                        restrained, and clearly structured.
+                    </p>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">1. Embossed
+                                Logo for Premium Tactility</h4>
+                            <p class="text-brand-stucco/70 text-sm leading-relaxed">The front of the card features an
+                                embossed wordmark, allowing the brand to be felt as well as seen. This raised effect
+                                reinforces the workshop’s craftsmanship and attention to detail.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">2. Deep Hague
+                                Blue Background</h4>
+                            <p class="text-brand-stucco/70 text-sm leading-relaxed">Using the brand’s signature Hague
+                                Blue creates a strong visual presence and instantly signals a high-end positioning. The
+                                dark, muted tone also enhances the embossed effect and keeps the design timeless.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">3. Calm,
+                                Balanced Typography</h4>
+                            <p class="text-brand-stucco/70 text-sm leading-relaxed">The serif logotype paired with a
+                                simple sans-serif for details creates a sophisticated contrast. Generous spacing gives
+                                the layout room to breathe and elevates the sense of luxury.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">4. Clear,
+                                Functional Information Layout</h4>
+                            <p class="text-brand-stucco/70 text-sm leading-relaxed">The reverse side features a crisp
+                                vertical divider separating the QR code from the contact details. This creates an
+                                organised structure and guides the eye naturally across the card.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">5. QR Code for
+                                Modern Accessibility</h4>
+                            <p class="text-brand-stucco/70 text-sm leading-relaxed">Including a QR code adds a
+                                contemporary touch and lets customers navigate directly to the website or booking form –
+                                merging traditional craftsmanship with modern usability.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Image (50%) -->
+                <div class="w-full md:w-1/2 flex items-center justify-center">
+                    <div class="w-full max-w-[90%]">
+                        <img src="images/businesscard.png" alt="Business Cards"
+                            class="w-full h-auto object-contain rounded-sm shadow-2xl shadow-black/20">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider before Leaflet -->
+            <div class="w-full h-px bg-brand-greige opacity-25 mb-24"></div>
+
+
+            <!-- SECTION B — LEAFLET DESIGN -->
+            <section class="mb-24 fade-up-section">
+                <!-- Header -->
+                <div class="text-center mb-10 fade-up">
+                    <h2 class="font-serif text-[36px] md:text-[42px] text-brand-stucco mb-4">Leaflet Design</h2>
+                    <p class="font-sans text-[18px] md:text-[20px] text-brand-stucco/80">How the Elegant House identity
+                        is expressed in printed marketing materials.</p>
+                    <div class="w-full h-px bg-brand-greige opacity-25 mt-10 mb-10"></div>
+                </div>
+
+                <!-- Two Column Layout -->
+                <div class="flex flex-col md:flex-row gap-12 lg:gap-16">
+                    <!-- Left Column: Images (55%) -->
+                    <div class="w-full md:w-[55%] flex flex-col items-center space-y-6">
+                        <img src="images/foldedleaflet.png" alt="Folded Leaflet"
+                            class="w-[80%] h-auto object-contain leaflet-img">
+                        <img src="images/frontleaflet.png" alt="Front Leaflet"
+                            class="w-[80%] h-auto object-contain leaflet-img">
+                        <img src="images/backleaflet.png" alt="Back Leaflet"
+                            class="w-[80%] h-auto object-contain leaflet-img">
+                    </div>
+
+                    <!-- Right Column: Text (45%) -->
+                    <div class="w-full md:w-[45%] mt-10 leaflet-text">
+                        <h3 class="font-serif text-[28px] text-brand-stucco mb-6">Leaflet Design</h3>
+                        <p class="font-sans text-brand-stucco/80 mb-6 leading-relaxed">
+                            The Elegant House leaflet was created as a high-impact physical marketing piece aimed at
+                            local customers. It introduces the brand, showcases its craftsmanship, and provides a clear
+                            way for customers to get in touch.
+                        </p>
+
+                        <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2 mt-8">
+                            Photography-Led Layout</h4>
+                        <p class="text-brand-stucco/70 text-sm leading-relaxed mb-6">The leaflet relies on strong,
+                            character-rich photography of real furniture pieces – not stock imagery. Full-cover images
+                            across the panels help create an immersive impression of quality and craft.</p>
+
+                        <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">Clear Front-Cover
+                            Hierarchy</h4>
+                        <p class="text-brand-stucco/70 text-sm leading-relaxed mb-6">The front cover combines a bold
+                            hero image with the wordmark and supporting tagline, establishing heritage and credibility
+                            before the leaflet is even opened.</p>
+
+                        <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">Elegant Colour
+                            Blocking</h4>
+                        <p class="text-brand-stucco/70 text-sm leading-relaxed mb-6">Inside panels use Drop Cloth, Hague
+                            Blue, and Light Blue tones to separate content while staying faithful to the brand palette.
+                            These neutral tones also improve readability and create calm visual structure.</p>
+
+                        <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">Organised,
+                            Reader-Friendly Structure</h4>
+                        <p class="text-brand-stucco/70 text-sm leading-relaxed mb-6">
+                            Each panel is designed with purpose:<br>
+                            – Services overview<br>
+                            – Brand statement or quote<br>
+                            – Contact information and QR code<br><br>
+                            Inside, content is structured into mission, reasons to choose Elegant House, and
+                            testimonials — giving readers a complete story at a glance.
+                        </p>
+
+                        <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">Balanced Typography
+                            & QR Integration</h4>
+                        <p class="text-brand-stucco/70 text-sm leading-relaxed mb-6">
+                            Serif headings bring elegance, while sans-serif body copy keeps information clean and
+                            approachable. The QR code links directly to digital channels, blending traditional print
+                            with modern utility.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider before Labels & Tags -->
+            <div class="w-full h-px bg-brand-greige opacity-25 mb-24"></div>
+
+            <!-- 5. SECTION C – LABELS & TAGS -->
+            <section class="flex flex-col md:flex-row gap-12 lg:gap-24 mb-24 fade-up">
+                <!-- Left Column: Text (45%) -->
+                <div class="w-full md:w-[45%]">
+                    <h3 class="font-serif text-[28px] text-brand-stucco mb-6">Labels & Tags</h3>
+                    <p class="font-sans text-brand-stucco/80 mb-8 leading-relaxed">
+                        Labels and tags extend The Elegant House identity onto individual pieces and packaging. They are
+                        small but critical touchpoints, reinforcing quality and ownership every time a customer
+                        interacts with a product.
+                    </p>
+
+                    <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-4">Design Approach</h4>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start text-brand-stucco/70 text-sm leading-relaxed">
+                            <span class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5 shrink-0"></span>
+                            <span><strong class="text-brand-stucco">Minimal, craft-focused aesthetic</strong> – clean
+                                layout featuring the serif wordmark, keeping the brand calm, premium, and
+                                handcrafted.</span>
+                        </li>
+                        <li class="flex items-start text-brand-stucco/70 text-sm leading-relaxed">
+                            <span class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5 shrink-0"></span>
+                            <span><strong class="text-brand-stucco">Consistent use of brand palette</strong> – soft
+                                neutrals and Hague Blue ensure labels remain subtle yet recognisable.</span>
+                        </li>
+                        <li class="flex items-start text-brand-stucco/70 text-sm leading-relaxed">
+                            <span class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5 shrink-0"></span>
+                            <span><strong class="text-brand-stucco">High legibility at small sizes</strong> – typography
+                                is adjusted for clarity without losing elegance.</span>
+                        </li>
+                    </ul>
+
+                    <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-4">Applications</h4>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start text-brand-stucco/70 text-sm leading-relaxed">
+                            <span class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5 shrink-0"></span>
+                            <span><strong class="text-brand-stucco">Fabric label</strong> – small woven tag on
+                                upholstered pieces, unobtrusive but clearly branded.</span>
+                        </li>
+                        <li class="flex items-start text-brand-stucco/70 text-sm leading-relaxed">
+                            <span class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5 shrink-0"></span>
+                            <span><strong class="text-brand-stucco">Sticker roll</strong> – used on packaging,
+                                protective wrapping, and workshop organisation while staying visually consistent.</span>
+                        </li>
+                        <li class="flex items-start text-brand-stucco/70 text-sm leading-relaxed">
+                            <span class="w-1.5 h-1.5 bg-brand-stucco rounded-full mr-3 mt-1.5 shrink-0"></span>
+                            <span><strong class="text-brand-stucco">Hang tags</strong> – attached to new or restored
+                                pieces, communicating professionalism and adding perceived value at handover.</span>
+                        </li>
+                    </ul>
+
+                    <h4 class="font-bold text-brand-stucco text-sm uppercase tracking-wide mb-2">Outcome</h4>
+                    <p class="text-brand-stucco/70 text-sm leading-relaxed">
+                        A subtle, premium brand presence on every physical touchpoint, from workshop to customer home.
+                    </p>
+                </div>
+
+                <!-- Right Column: Images (55%) -->
+                <div class="w-full md:w-[55%] grid grid-cols-2 gap-6 items-start content-start">
+                    <!-- Main Image (Full Width) -->
+                    <div class="col-span-2">
+                        <img src="images/sofatag.png" alt="Sofa Tag"
+                            class="w-full h-auto max-h-[450px] object-cover rounded-lg shadow-2xl shadow-black/30 hover:scale-[1.02] transition-transform duration-700">
+                    </div>
+
+                    <!-- Sub Images (Half Width) -->
+                    <div class="col-span-1">
+                        <img src="images/hangingtag.png" alt="Hanging Tag"
+                            class="w-full h-auto max-h-[350px] object-cover rounded-lg shadow-2xl shadow-black/30 hover:scale-[1.02] transition-transform duration-700">
+                    </div>
+                    <div class="col-span-1">
+                        <img src="images/rolltag.png" alt="Roll Tag"
+                            class="w-full h-auto max-h-[350px] object-cover rounded-lg shadow-2xl shadow-black/30 hover:scale-[1.02] transition-transform duration-700">
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 6. PAGE FOOTER – SUMMARY -->
+            <footer class="text-center pt-20 pb-16 border-t border-brand-greige/20 fade-up">
+                <p
+                    class="font-sans text-[16px] md:text-[18px] text-brand-stucco/80 max-w-[700px] mx-auto leading-relaxed">
+                    Print collateral for The Elegant House brings the brand into the physical world with the same
+                    clarity, restraint, and crafted detail seen online. From cards to leaflets and labels, every piece
+                    is designed to feel premium, intentional, and consistent.
+                </p>
+            </footer>
+
+        </div>
+    </main>
+
+    <script>
+        // Preloader Logic
+        function removePreloader() {
+            const preloader = document.getElementById('preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+                }, 500);
+            }
+        }
+        window.addEventListener('load', removePreloader);
+        setTimeout(removePreloader, 3000);
+
+        // Custom Cursor Logic
+        try {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            // Relaxed condition: Check only for non-mobile width to ensure Safari desktop gets it
+            if (window.innerWidth >= 768 && cursorDot && cursorOutline) {
+                document.body.classList.add('has-custom-cursor');
+
+                window.addEventListener('mousemove', (e) => {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+
+                    // Use GSAP for better Safari compatibility
+                    gsap.to(cursorOutline, {
+                        left: posX,
+                        top: posY,
+                        duration: 0.5,
+                        ease: "power2.out"
+                    });
+                });
+
+                const hoverTargets = document.querySelectorAll('a, button, .hover-target');
+                hoverTargets.forEach(target => {
+                    target.addEventListener('mouseenter', () => {
+                        cursorOutline.classList.add('hovered');
+                    });
+                    target.addEventListener('mouseleave', () => {
+                        cursorOutline.classList.remove('hovered');
+                    });
+                });
+            }
+        } catch (e) { console.warn("Cursor init failed:", e); }
+
+        // Init Icons
+        lucide.createIcons();
+
+        // Init Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            smooth: true,
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // General Fade Up
+        gsap.utils.toArray('.fade-up').forEach((elem, i) => {
+            gsap.from(elem, {
+                scrollTrigger: {
+                    trigger: elem,
+                    start: "top 90%",
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.7,
+                ease: "power2.out"
+            });
+        });
+
+        // Leaflet Section Animation
+        // Leaflet Section Animation
+        // Images Stagger
+        gsap.from(".leaflet-img", {
+            scrollTrigger: {
+                trigger: ".fade-up-section",
+                start: "top 85%",
+            },
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.15,
+            ease: "power2.out"
+        });
+
+        // Text Content
+        gsap.from(".leaflet-text", {
+            scrollTrigger: {
+                trigger: ".fade-up-section",
+                start: "top 85%",
+            },
+            opacity: 0,
+            duration: 0.7,
+            delay: 0.2,
+            ease: "power2.out"
+        });
+
+    </script>
+</body>
+
+</html>
