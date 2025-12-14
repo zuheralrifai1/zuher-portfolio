@@ -120,7 +120,7 @@
 
     <!-- Back to Project Link -->
     <div class="fixed top-8 left-8 z-50">
-        <a href="project-elegant-house.html#section-8"
+        <a href="javascript:history.back()"
             class="flex items-center text-brand-onyx hover:text-brand-walnut transition-colors group">
             <i data-lucide="arrow-left" class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"></i>
             <span class="text-sm tracking-widest uppercase">Back</span>
@@ -301,7 +301,7 @@
             </section>
 
             <!-- 6. FOOTER SECTION -->
-            <footer class="text-center pt-16 pb-20 border-t border-brand-onyx/10 fade-up">
+            <footer class="text-center pt-12 pb-6 border-t border-brand-onyx/10 fade-up">
                 <p class="font-sans text-[16px] text-brand-walnut max-w-3xl mx-auto leading-relaxed">
                     The Elegant House layout system creates structure, balance, and clarity across all brand
                     applications.<br>
@@ -309,7 +309,7 @@
                     consistent, and visually harmonious.
                 </p>
                 <div class="mt-12 text-xs tracking-widest uppercase text-brand-onyx/30">
-                    &copy; 2024 The Elegant House. All Rights Reserved.
+                    &copy; <span x-data x-text="new Date().getFullYear()"></span> Zuher Alrifai. All Rights Reserved.
                 </div>
             </footer>
 

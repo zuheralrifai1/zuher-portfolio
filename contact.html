@@ -318,7 +318,7 @@
                             <div class="relative">
                                 <label for="name"
                                     class="block text-sm font-bold uppercase tracking-widest text-brand-stucco/80 mb-2">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Your Name"
+                                <input type="text" id="name" name="name" placeholder="Your Name" required
                                     class="block w-full px-4 py-3 bg-brand-stucco/5 border border-brand-stucco/20 text-brand-stucco focus:outline-none focus:border-brand-walnut focus:bg-brand-stucco/10 transition-colors">
                             </div>
 
@@ -326,7 +326,7 @@
                             <div class="relative">
                                 <label for="email"
                                     class="block text-sm font-bold uppercase tracking-widest text-brand-stucco/80 mb-2">Email</label>
-                                <input type="email" id="email" name="email" placeholder="your@email.com"
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required
                                     class="block w-full px-4 py-3 bg-brand-stucco/5 border border-brand-stucco/20 text-brand-stucco focus:outline-none focus:border-brand-walnut focus:bg-brand-stucco/10 transition-colors">
                             </div>
                         </div>
@@ -387,6 +387,7 @@
                                 your biggest brand challenge right now?</label>
                             <textarea id="challenge" name="challenge" rows="4"
                                 placeholder="What problem are you trying to solve, and what does success look like for you?"
+                                required
                                 class="block w-full px-4 py-3 bg-brand-stucco/5 border border-brand-stucco/20 text-brand-stucco focus:outline-none focus:border-brand-walnut focus:bg-brand-stucco/10 transition-colors resize-none"></textarea>
                         </div>
 
@@ -412,7 +413,7 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-brand-onyx pt-12 pb-12 relative overflow-hidden">
+    <footer id="contact" class="bg-brand-onyx pt-12 pb-6 relative overflow-hidden">
         <div
             class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-walnut/20 to-transparent">
         </div>
@@ -428,7 +429,7 @@
             <div
                 class="mt-12 border-t border-brand-walnut/20 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-brand-ash uppercase tracking-widest font-medium">
                 <div class="mb-6 md:mb-0" x-data>
-                    &copy; <span x-text="new Date().getFullYear()"></span> Zuher Alrifai. All Rights Reserved.
+                    &copy; <span x-data x-text="new Date().getFullYear()"></span> Zuher Alrifai. All Rights Reserved.
                 </div>
                 <div class="flex space-x-12">
                     <a href="mailto:4zuheralrifai@gmail.com"

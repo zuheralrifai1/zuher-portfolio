@@ -117,7 +117,7 @@
 
     <!-- Back to Project Link -->
     <div class="fixed top-8 left-8 z-50 mix-blend-difference">
-        <a href="project-elegant-house.html#section-8"
+        <a href="javascript:history.back()"
             class="flex items-center text-brand-stucco hover:text-brand-walnut transition-colors group">
             <i data-lucide="arrow-left" class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"></i>
             <span class="text-sm tracking-widest uppercase">Back</span>
@@ -247,8 +247,8 @@
 
     <!-- Footer -->
     <footer
-        class="border-t border-brand-stucco/5 py-12 text-center text-brand-stucco/30 text-xs tracking-widest uppercase">
-        &copy; 2024 The Elegant House. All Rights Reserved.
+        class="border-t border-brand-stucco/5 pt-12 pb-6 text-center text-brand-stucco/30 text-xs tracking-widest uppercase">
+        &copy; <span x-data x-text="new Date().getFullYear()"></span> Zuher Alrifai. All Rights Reserved.
     </footer>
 
     <script>
