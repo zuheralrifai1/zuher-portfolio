@@ -169,8 +169,8 @@
             <div class="container mx-auto px-6 flex justify-between items-center relative z-50">
                 <!-- Logo -->
                 <a href="index.html"
-                    class="text-2xl font-serif font-bold tracking-tighter transition-colors duration-300"
-                    :class="{ 'text-brand-stucco': scrolled || mobileMenuOpen, 'text-brand-stucco': !scrolled && !mobileMenuOpen }">
+                    class="text-2xl font-serif font-bold tracking-tighter transition-colors duration-300 text-brand-stucco"
+                    :class="{ '': scrolled || mobileMenuOpen, '': !scrolled && !mobileMenuOpen }">
                     ZUHER ALRIFAI
                 </a>
 
@@ -180,8 +180,8 @@
                     <div class="relative group" x-data="{ open: false }" @mouseenter="open = true"
                         @mouseleave="open = false">
                         <a href="index.html#work"
-                            class="relative transition-colors duration-300 flex items-center gap-1"
-                            :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut': !scrolled }">
+                            class="relative transition-colors duration-300 flex items-center gap-1 text-brand-stucco hover:text-brand-walnut"
+                            :class="{ '': scrolled, '': !scrolled }">
                             <span>PROJECTS</span>
                             <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-300"
                                 :class="{ 'rotate-180': open }"></i>
@@ -262,19 +262,21 @@
                         </div>
                     </div>
 
-                    <a href="about.html" class="transition-colors duration-300"
-                        :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut': !scrolled }">
+                    <a href="about.html"
+                        class="transition-colors duration-300 text-brand-stucco hover:text-brand-walnut"
+                        :class="{ '': scrolled, '': !scrolled }">
                         <span>ABOUT</span>
                     </a>
-                    <a href="contact.html" class="transition-colors duration-300"
-                        :class="{ 'text-brand-stucco hover:text-brand-walnut': scrolled, 'text-brand-stucco hover:text-brand-walnut': !scrolled }">
+                    <a href="contact.html"
+                        class="transition-colors duration-300 text-brand-stucco hover:text-brand-walnut"
+                        :class="{ '': scrolled, '': !scrolled }">
                         <span>CONTACT</span>
                     </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden focus:outline-none" @click="mobileMenuOpen = !mobileMenuOpen"
-                    :class="{ 'text-brand-stucco': scrolled || mobileMenuOpen, 'text-brand-stucco': !scrolled && !mobileMenuOpen }">
+                <button class="md:hidden focus:outline-none text-brand-stucco" @click="mobileMenuOpen = !mobileMenuOpen"
+                    :class="{ '': scrolled || mobileMenuOpen, '': !scrolled && !mobileMenuOpen }">
                     <i data-lucide="menu" x-show="!mobileMenuOpen" class="w-6 h-6"></i>
                     <i data-lucide="x" x-show="mobileMenuOpen" class="w-6 h-6" x-cloak></i>
                 </button>
